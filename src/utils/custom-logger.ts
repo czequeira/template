@@ -14,7 +14,10 @@ export class CustomLogger implements LoggerService {
   private stream;
   constructor() {
     this.stream = rfs.createStream(
-      (_, index) => `logs/${dayjs().format('YYYY-MM-DD')}(${index || 0}).log`,
+      (_, index) =>
+        `${process.env.LOG_DIR || 'logs'}/${dayjs().format('YYYY-MM-DD')}(${
+          index || 0
+        }).log`,
       {
         size: '10M',
         interval: '1d',
